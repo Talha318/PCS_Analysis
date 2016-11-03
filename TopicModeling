@@ -14,9 +14,74 @@ library(Rgraphviz)            #Correlation
 #Assume that the corpus is being imported via .txt files (ANSI encoding)
 
 
-
 #cname = [enter file path](".","corpus","txt")
 cname
+
+#display number of files in our local corpus
+length(dir(cname))
+
+#display some actual file names of our corpus files
+dir(cname)
+
+
+#Loading the tm package (if you haven't already)
+library(tm)
+
+#savings the collection of documents in memory as a variable called 'docs'
+docs = Corpus(DirSource(cname))
+summary(docs)
+
+#inspecting our 'docs' variable
+inspect(docs)
+
+
+#function to view the text of docs variable within R console
+viewDocs = function(d, n) {d %>% extract2(n) %>% as.character() %.% writeLines()}
+viewDocs(docs, 16)
+#end of function
+
+#preparing the corpus
+#transformations on txt. View transformations and view which ones you want to implement
+
+getTransformations()
+
+
+#function to convert certain characters to other characters - basically a search and replace. Show here as a search and replace with" ". 
+toSpace = content_tranformer(function(x, pattern) gsub(pattern, " ",x))
+
+#replacing the "/" character with a " "
+docs = tm_map(docs, toSpace, "/")
+
+
+
+#converting all text in 'docs' variable to lower case
+docs = tm_map(docs, content_transformer(tolower))
+
+#remove from docs: numbers, punctuation, and whitespace
+docs = tm_map(docs, removeNumbers)
+docs = tm_map(docs, removePunctuation)
+docs = tm_map(docs, stripWhitespace)
+
+
+#REMEMBER YOU CAN VIEW THE DOCS TEXT IN THE R CONSOLE ANYTIME VIA: viewDocs(docs,16)
+
+#can remove english stop words - essentially words in english that provide no real content meaning to a sentence
+docs = tm_map(docs, removeWords, stopwords("english"))
+
+#To remove any other specific words from the text use the following:
+docs = tm_map(docs, removeWords, c("word1", "word2"))
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
