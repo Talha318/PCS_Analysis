@@ -1,0 +1,23 @@
+#loading all of the necessary packages
+
+library(tm)                   #This is the textmining package. Install this package if it is not already installed.
+library(qdap)                 #Quantitative discourse analysis.
+library(qdapDictionaries)    
+library(dplyr)                #Data wrangling, pipe operator %>%()
+library(RColorBrewer)         #Generate palette of colours for plots.
+library(ggplot2)              #Plot word frequencies 
+library(scales)               #Include commas in numbers. 
+library(Rgraphviz)            #Correlation
+
+
+#This codes assumes that the corpus being entered will be divided on a rule basis. This way the rule entity's topic can be modelled.  
+#Assume that the corpus is being imported via .txt files (ANSI encoding)
+
+
+
+#cname = [enter file path](".","corpus","txt")
+cname
+
+
+
+
