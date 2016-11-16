@@ -14,7 +14,7 @@ library(Rgraphviz)            #Correlation
 #Assume that the corpus is being imported via .txt files (ANSI encoding)
 
 
-#cname = [enter file path](".","corpus","txt")
+cname = file.path(".","corpus","txt")
 cname
 
 #display number of files in our local corpus
