@@ -54,7 +54,11 @@ dfcorpus = tm_map(dfcorpus, stripWhitespace)
 
 #creating document term matrix
 df_dtm = DocumentTermMatrix(dfcorpus)
-dtm.matrix = as.matrix(df_dtm)
+
+#remove sparse terms
+df_dtm_1= removeSparseTerms(df_dtm, 0.999)
+
+dtm.matrix = as.matrix(df_dtm_1)
 
 #Creating Features / key words and phrases that suggest actionability
 # df$shall = str_detect(df[,3],"shall")
