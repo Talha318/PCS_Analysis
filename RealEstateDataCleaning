@@ -1,0 +1,33 @@
+
+library(httr)
+library(ZillowR)
+library(XML)
+library(methods)
+
+ZWSID = ""
+
+set_zillow_web_service_id("")
+
+Address = c("", "")
+citystatezip = "Nashville, TN"
+Response = 0
+Output = NULL
+
+for (i in 1:length(Address) ) { 
+  
+  Output = GetDeepSearchResults(Address[i], citystatezip)
+  Response[i] = Output[3]
+}
+
+#Cleaning the XML Response Data into a dataframe where each column is a home
+for (i in 2:length(Response)) {
+  
+  testdata = as.data.frame( xmlToList(Response[[1]]) )
+  testdata[,i] = as.data.frame( xmlToList( Response[[i]] ) )
+}
+
+View( as.data.frame( t(testdata) ) )
+
+#Output = GetDeepSearchResults(Address, citystatezip)
+#data = content(Output[3], as = "parsed")
+
